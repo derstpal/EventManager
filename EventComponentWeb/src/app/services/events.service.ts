@@ -1,6 +1,8 @@
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { eventEntity } from '../models/evententity.model';
 
+@Injectable()
 export class EventService {
   constructor() {}
 

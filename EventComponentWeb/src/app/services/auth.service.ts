@@ -1,11 +1,13 @@
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/internal/Subject';
 
+@Injectable()
 export class AuthService {
   public isAuth: Boolean | null = false;
 
   public isAuthSubject: Subject<Boolean | null> = new Subject<Boolean | null>();
 
-  public ConnectAsync() {
+  public SigninAsync(email: string, password: string) {
     this.SetIsAuthSubject(null);
     return new Promise((resolve, reject) => {
       setTimeout(() => {

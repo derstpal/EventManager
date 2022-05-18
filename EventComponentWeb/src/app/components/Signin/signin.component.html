@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-1">
+    <h2>Connect</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="isAuth !== true">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="form-control"
+            formControlName="email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            formControlName="password"
+          />
+        </div>
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        *ngIf="isAuth === false"
+        [disabled]="this.signupForm?.invalid"
+      >
+      Connect
+      </button>
+    </form>
+    <p *ngIf="isAuth === true">Connected</p>
+  </div>
+</div>
