@@ -11,6 +11,7 @@ import { EventService } from './services/events.service';
 import { EventlistitemComponent } from './components/eventlistitem/eventlistitem.component';
 import { ConnectComponent } from './components/connect/connect.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
+import { AuthService } from './services/auth.service';
 
 const appRoutes: Route[] = [
   { path: 'events', component: EventsComponent },
@@ -29,7 +30,7 @@ const appRoutes: Route[] = [
     AddEventComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(appRoutes)],
-  providers: [EventService],
+  providers: [EventService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
