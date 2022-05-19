@@ -17,7 +17,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   ) {}
 
   private isAuthSubscription: Subscription | undefined;
-  isAuth: Boolean | null = false;
+  isAuth: boolean | undefined = false;
   signinForm: FormGroup | any;
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.isAuth = null;
+    this.isAuth = undefined;
     const email = this.signinForm?.get('email')?.value;
     const password = this.signinForm?.get('password')?.value;
     this.authService.SigninAsync(email, password).then(

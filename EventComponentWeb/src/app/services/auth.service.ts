@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
 export class AuthService implements CanActivate  {
   constructor(private fireBaseService: FireBaseService) {}
 
-  public isAuth: Boolean | null = false;
+  public isAuth: boolean | undefined = false;
 
-  public isAuthSubject: Subject<Boolean | null> = new Subject<Boolean | null>();
+  public isAuthSubject: Subject<boolean | undefined> = new Subject<boolean | undefined>();
 
   public SigninAsync(email: string, password: string) : Promise<boolean> {
-    this.SetIsAuthSubject(null);
+    this.SetIsAuthSubject(undefined);
     console.log('connecting');
     return new Promise((resolve, reject) =>
       {
@@ -31,7 +31,7 @@ export class AuthService implements CanActivate  {
   }
 
   public SignupAsync(email: string, password: string) : Promise<boolean> {
-    this.SetIsAuthSubject(null);
+    this.SetIsAuthSubject(undefined);
     return new Promise((resolve, reject) =>
       {
         this.fireBaseService.CreateUserWithEmailAndPasswordAsync(email, password).then(
@@ -48,7 +48,7 @@ export class AuthService implements CanActivate  {
   }
 
   public SignoutAsync():  Promise<void> {
-    this.SetIsAuthSubject(null);
+    this.SetIsAuthSubject(undefined);
     return new Promise((resolve, reject) =>
       {
         this.fireBaseService.SignoutAsync().then(
@@ -68,7 +68,7 @@ export class AuthService implements CanActivate  {
     this.isAuthSubject.next(this.isAuth);
   }
 
-  private SetIsAuthSubject(value: Boolean | null): void {
+  private SetIsAuthSubject(value: boolean | undefined): void {
     this.isAuth = value;
     this.emitIsAuthSubject();
   }

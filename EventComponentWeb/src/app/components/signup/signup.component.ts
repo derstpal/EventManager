@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
   ) {}
 
   private isAuthSubscription: Subscription | undefined;
-  isAuth: Boolean | null = false;
+  isAuth: boolean | undefined = false;
   signupForm: FormGroup | any;
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.isAuth = null;
+    this.isAuth = undefined;
     const email = this.signupForm?.get('email')?.value;
     const password = this.signupForm?.get('password')?.value;
     this.authService.SignupAsync(email, password).then(
