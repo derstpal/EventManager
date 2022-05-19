@@ -1,10 +1,11 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FireBaseService } from './fire-base.service';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/internal/Subject';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements CanActivate  {
   constructor(private fireBaseService: FireBaseService) {}
 
   public isAuth: Boolean | null = false;
@@ -14,10 +15,9 @@ export class AuthService {
   public SigninAsync(email: string, password: string) : Promise<boolean> {
     this.SetIsAuthSubject(null);
     console.log('connecting');
-
     return new Promise((resolve, reject) =>
       {
-        this.fireBaseService.siginAsync(email, password).then(
+        this.fireBaseService.SigninAsync(email, password).then(
           user => {
             this.SetIsAuthSubject(true);
             console.log('user ' + user.user.email + ' connected!');
@@ -34,7 +34,7 @@ export class AuthService {
     this.SetIsAuthSubject(null);
     return new Promise((resolve, reject) =>
       {
-        this.fireBaseService.createUserWithEmailAndPasswordAsync(email, password).then(
+        this.fireBaseService.CreateUserWithEmailAndPasswordAsync(email, password).then(
           user => {
             this.SetIsAuthSubject(true);
             console.log('user ' + user.user.email + ' is added!');
@@ -47,8 +47,21 @@ export class AuthService {
       });
   }
 
-  public Disonnect(): void {
-    this.SetIsAuthSubject(false);
+  public SignoutAsync():  Promise<void> {
+    this.SetIsAuthSubject(null);
+    return new Promise((resolve, reject) =>
+      {
+        this.fireBaseService.SignoutAsync().then(
+          () => {
+            this.SetIsAuthSubject(false);
+            console.log('user disconnected!');
+            resolve();
+          },
+          (error) => {
+            this.SetIsAuthSubject(false);
+            reject(error);
+          });
+      });
   }
 
   public emitIsAuthSubject() {
@@ -58,5 +71,10 @@ export class AuthService {
   private SetIsAuthSubject(value: Boolean | null): void {
     this.isAuth = value;
     this.emitIsAuthSubject();
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    return this.isAuth === true;
+
   }
 }

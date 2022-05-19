@@ -27,13 +27,18 @@ export class FireBaseService {
     this.auth = getAuth(this.firebase);
   }
 
-  createUserWithEmailAndPasswordAsync(email : string, password : string) : Promise<UserCredential>
+  CreateUserWithEmailAndPasswordAsync(email : string, password : string) : Promise<UserCredential>
   {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
-  siginAsync(email : string, password : string) : Promise<UserCredential>
+  SigninAsync(email : string, password : string) : Promise<UserCredential>
   {
     return signInWithEmailAndPassword(this.auth, email, password);
+  }
+
+  SignoutAsync() : Promise<void>
+  {
+    return this.auth.signOut();
   }
 }

@@ -13,12 +13,15 @@ import { EventlistitemComponent } from './components/eventlistitem/eventlistitem
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { AuthService } from './services/auth.service';
 import { SigninComponent } from './components/Signin/signin.component';
+import { FourOFourComponent } from './main/four-ofour/four-ofour.component';
 
 const appRoutes: Route[] = [
-  { path: 'events', component: EventsComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'addEvent', component: AddEventComponent },
+  { path: '404', component: FourOFourComponent },
+  { path: 'events', component: EventsComponent, canActivate: [AuthService] },
+  { path: 'addEvent', component: AddEventComponent, canActivate: [AuthService] },
+  { path: '**', component: FourOFourComponent },
 ];
 
 @NgModule({
@@ -30,7 +33,8 @@ const appRoutes: Route[] = [
     EventsComponent,
     SigninComponent,
     AddEventComponent,
-    SignupComponent
+    SignupComponent,
+    FourOFourComponent
   ],
   imports: [
     FormsModule,
