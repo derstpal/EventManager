@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-1">
-    <h2>Signin</h2>
-    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+    <h2>Signup</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <div *ngIf="isAuth !== true">
         <div class="form-group">
           <label for="email">Email</label>
@@ -28,9 +28,9 @@
         class="btn btn-primary"
         type="submit"
         *ngIf="isAuth === false"
-        [disabled]="this.signinForm?.invalid"
+        [disabled]="this.signupForm?.invalid"
       >
-      Connect
+      Signup
       </button>
     </form>
     <p *ngIf="isAuth === true">Connected</p>

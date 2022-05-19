@@ -1,8 +1,8 @@
+import { SignupComponent } from './components/signup/signup.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Route, RouterModule } from '@angular/router';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContentComponent } from './main/content/content.component';
@@ -17,6 +17,7 @@ import { SigninComponent } from './components/Signin/signin.component';
 const appRoutes: Route[] = [
   { path: 'events', component: EventsComponent },
   { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'addEvent', component: AddEventComponent },
 ];
 
@@ -29,6 +30,7 @@ const appRoutes: Route[] = [
     EventsComponent,
     SigninComponent,
     AddEventComponent,
+    SignupComponent
   ],
   imports: [
     FormsModule,

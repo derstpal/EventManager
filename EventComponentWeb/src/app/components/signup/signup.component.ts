@@ -1,15 +1,15 @@
+import { AuthService } from './../../services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from './../../services/auth.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-connect',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.scss'],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss'],
 })
-export class SigninComponent implements OnInit, OnDestroy {
+export class SignupComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -18,7 +18,7 @@ export class SigninComponent implements OnInit, OnDestroy {
 
   private isAuthSubscription: Subscription | undefined;
   isAuth: Boolean | null = false;
-  signinForm: FormGroup | any;
+  signupForm: FormGroup | any;
 
   ngOnInit(): void {
     this.InitIsAuthSubscription();
@@ -26,7 +26,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   InitForm() {
-    this.signinForm = this.formBuilder.group({
+    this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
@@ -45,9 +45,9 @@ export class SigninComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     this.isAuth = null;
-    const email = this.signinForm?.get('email')?.value;
-    const password = this.signinForm?.get('password')?.value;
-    this.authService.SigninAsync(email, password).then(
+    const email = this.signupForm?.get('email')?.value;
+    const password = this.signupForm?.get('password')?.value;
+    this.authService.SignupAsync(email, password).then(
       () => {
         console.log('user ' + email + ' connected');
         this.router.navigate(['/events']);
