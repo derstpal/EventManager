@@ -14,13 +14,19 @@ import { AddEventComponent } from './components/add-event/add-event.component';
 import { AuthService } from './services/auth.service';
 import { SigninComponent } from './components/Signin/signin.component';
 import { FourOFourComponent } from './main/four-ofour/four-ofour.component';
+import { HttpClient } from '@angular/common/http';
+import { FireBaseService } from './services/fire-base.service';
 
 const appRoutes: Route[] = [
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: '404', component: FourOFourComponent },
   { path: 'events', component: EventsComponent, canActivate: [AuthService] },
-  { path: 'addEvent', component: AddEventComponent, canActivate: [AuthService] },
+  {
+    path: 'addEvent',
+    component: AddEventComponent,
+    canActivate: [AuthService],
+  },
   { path: '**', component: FourOFourComponent },
 ];
 
@@ -34,7 +40,7 @@ const appRoutes: Route[] = [
     SigninComponent,
     AddEventComponent,
     SignupComponent,
-    FourOFourComponent
+    FourOFourComponent,
   ],
   imports: [
     FormsModule,
@@ -43,7 +49,13 @@ const appRoutes: Route[] = [
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [EventService, AuthService, FormBuilder],
+  providers: [
+    FireBaseService,
+    AuthService,
+    FormBuilder,
+    HttpClient,
+    EventService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
