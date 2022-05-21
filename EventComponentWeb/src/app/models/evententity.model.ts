@@ -1,3 +1,9 @@
+import * as moment from "moment";
+
 export class eventEntity {
-  constructor(public name: string, public date: Date) {}
+  public momentDate : moment.Moment;
+  constructor(public name: string, public date: Date) {
+    this.momentDate = moment(date);
+
+  }
 }
