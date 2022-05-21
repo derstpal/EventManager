@@ -83,55 +83,36 @@ export class FireBaseService {
   OnChildAdded(
     ref: DatabaseReference,
     callback: (key: string | null, item: any) => unknown
-  ): () => void {
+  ): Unsubscribe {
     var internalCb = this.getEventCallBack(callback, 'Added', ref);
-    onChildAdded(
-      ref,
-      internalCb,
-      (error) => {
-        console.error(error);
-      }
-    );
-    return () => {
-      off(ref, 'child_added', internalCb);
-    };
+    return onChildAdded(ref, internalCb, (error) => {
+      console.error(error);
+    });
   }
   OnChildRemoved(
     ref: DatabaseReference,
     callback: (key: string | null, item: any) => unknown
-  ): () => void {
+  ): Unsubscribe {
     var internalCb = this.getEventCallBack(callback, 'removed', ref);
-    onChildRemoved(
-      ref,
-      internalCb,
-      (error) => {
-        console.error(error);
-      }
-    );
-    return () => {
-      off(ref, 'child_removed', internalCb); console.log('child_removed event off');
-    };
+    return onChildRemoved(ref, internalCb, (error) => {
+      console.error(error);
+    });
   }
 
   OnChildChanged(
     ref: DatabaseReference,
     callback: (key: string | null, item: any) => unknown
-  ): () => void {
+  ): Unsubscribe {
     var internalCb = this.getEventCallBack(callback, 'updated', ref);
-    onChildChanged(
-      ref,
-      internalCb,
-      (error) => {
-        console.error(error);
-      }
-    );
-    return () => {
-      off(ref, 'child_changed', internalCb);
-    };
+    return onChildChanged(ref, internalCb, (error) => {
+      console.error(error);
+    });
   }
 
   private getEventCallBack(
-    callback: (key: string | null, item: any) => unknown, action : string, ref : DatabaseReference
+    callback: (key: string | null, item: any) => unknown,
+    action: string,
+    ref: DatabaseReference
   ) {
     return (snapshot: DataSnapshot) => {
       console.log(`Child ${action} in ${ref.toString()}:`);
