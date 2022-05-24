@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FireBaseService } from './../../services/fire-base.service';
 import { Component, OnInit } from '@angular/core';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
-import { eventEntity } from 'src/app/models/evententity.model';
 
 @Component({
   selector: 'app-add-event',
@@ -23,8 +21,9 @@ export class AddEventComponent implements OnInit {
 
   ngOnInit(): void {
     this.addEventForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
       date: ['', [Validators.required]],
+      description: ['', [Validators.maxLength(200)]],
     });
   }
 
@@ -33,13 +32,14 @@ export class AddEventComponent implements OnInit {
       return;
     }
 
-    const name = this.addEventForm?.get('name')?.value;
-    const date = this.addEventForm?.get('date')?.value;
-
-    const newEvent = new eventEntity(name, date);
-
-    this.fireBaseService.PushAsync(`users/${this.authService.getConnectedUserId()}/events`, newEvent).then(() => {
-      this.router.navigate(['events']);
-    });
+    this.fireBaseService
+      .PushAsync(`users/${this.authService.getConnectedUserId()}/events`, {
+        name: this.addEventForm?.get('name')?.value,
+        date: this.addEventForm?.get('date')?.value,
+        description: this.addEventForm?.get('description')?.value,
+      })
+      .then(() => {
+        this.router.navigate(['events']);
+      });
   }
 }

@@ -2,10 +2,21 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { FireBaseService } from './fire-base.service';
 import { Injectable, OnInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
+import {
+  map,
+  Subject,
+  Observable,
+  takeUntil,
+  takeWhile,
+  merge,
+  mergeAll,
+  concat,
+  mergeMap,
+} from 'rxjs';
 import { eventEntity } from '../models/evententity.model';
 import { ThisReceiver } from '@angular/compiler';
 import { Unsubscribe } from 'firebase/auth';
+import { DataSnapshot } from 'firebase/database';
 
 @Injectable({
   providedIn: 'root',
@@ -13,62 +24,16 @@ import { Unsubscribe } from 'firebase/auth';
 export class EventService {
   constructor(
     private fireBaseService: FireBaseService,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router
-  ) {
-    this.authService.isAuthSubject.subscribe((isAuth) => {
+  ) {}
 
-      console.log('stop listening events');
-      this.reset();
-      if (isAuth === true) {
-        console.log('start listening events');
-        this.startListening();
-      }
-    });
-    this.authService.emitIsAuthSubject();
-  }
-
-  events: Map<string | null, eventEntity> = new Map<
+  private events: Map<string | null, eventEntity> = new Map<
     string | null,
     eventEntity
   >();
-  eventAddedSub: Unsubscribe | undefined;
-  eventRemovedSub: Unsubscribe | undefined;
-  eventUpdatedSub: Unsubscribe | undefined;
 
-  private startListening() {
-    this.eventAddedSub = this.fireBaseService.OnChildAdded(
-      this.getDatabaseReference(),
-      (k, e) => {
-        this.events.set(k, new eventEntity(e.name, e.date));
-        this.emitEventsSubject();
-      }
-    );
-
-    this.eventRemovedSub = this.fireBaseService.OnChildRemoved(
-      this.getDatabaseReference(),
-      (k, e) => {
-        this.events.delete(k);
-        this.emitEventsSubject();
-      }
-    );
-
-    this.eventUpdatedSub = this.fireBaseService.OnChildChanged(
-      this.getDatabaseReference(),
-      (k, e) => {
-        this.events.set(k, new eventEntity(e.name, e.date));
-        this.emitEventsSubject();
-      }
-    );
-  }
   public eventsSubject: Subject<eventEntity[]> = new Subject<eventEntity[]>();
-
-  private reset() {
-    this.eventAddedSub?.call(undefined);
-    this.eventRemovedSub?.call(undefined);
-    this.eventUpdatedSub?.call(undefined);
-    this.events.clear();
-  }
 
   public emitEventsSubject() {
     this.eventsSubject.next(Array.from(this.events.values()));
@@ -84,6 +49,68 @@ export class EventService {
   }
 
   private getDatabaseReference() {
-    return this.fireBaseService.GetDatabaseReference(`users/${this.authService.getConnectedUserId()}/events`);
+    return this.fireBaseService.GetDatabaseReference(
+      `users/${this.authService.getConnectedUserId()}/events`
+    );
+  }
+
+  OnEventAdded(): Observable<eventEntity> {
+    return this.fireBaseService
+      .OnChildAdded(this.getDatabaseReference())
+      .pipe(
+        takeUntil(this.authService.isAuthSubject.pipe(map((b) => !b))),
+        map<DataSnapshot, eventEntity>(this.createEventFromSnapshot)
+      );
+  }
+
+  OnEventRemoved(): Observable<eventEntity> {
+    return this.fireBaseService
+      .OnChildRemoved(this.getDatabaseReference())
+      .pipe(
+        takeUntil(this.authService.isAuthSubject.pipe(map((b) => !b))),
+        map<DataSnapshot, eventEntity>(this.createEventFromSnapshot)
+      );
+  }
+
+  OnEventChanged(): Observable<eventEntity> {
+    return this.fireBaseService
+      .OnChildChanged(this.getDatabaseReference())
+      .pipe(
+        takeUntil(this.authService.isAuthSubject.pipe(map((b) => !b))),
+        map<DataSnapshot, eventEntity>(this.createEventFromSnapshot)
+      );
+  }
+
+  OnEventList() {
+    //var events = new Map<string | null, eventEntity>();
+    var events : eventEntity[] = [];
+    return merge(
+      this.OnEventAdded().pipe(
+        map((e) => {
+          events.push(e);
+          console.log(`${e.key} added`);
+          return events;
+        })
+      ),
+      this.OnEventChanged().pipe(
+        map((e) => {
+          var index = events.findIndex(e => e.key == e.key);
+          events[index] = e;
+          return events;
+        })
+      ),
+      this.OnEventRemoved().pipe(
+        map((e) => {
+          var index = events.findIndex(e => e.key == e.key);
+          events.splice(index, 1);
+          return events;
+        })
+      )
+    );
+  }
+
+  private createEventFromSnapshot(snapshot: DataSnapshot): eventEntity {
+    const e = snapshot.val();
+    return new eventEntity(snapshot.key? snapshot.key : '', e.name, e.description, e.date);
   }
 }

@@ -22,6 +22,7 @@ import {
   signInWithEmailAndPassword,
   Unsubscribe,
 } from 'firebase/auth';
+import { map, Observable, observable, pipe, Subscriber } from 'rxjs';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCzCGo7pgRVeU-Sy5ZbJ4IINlnuVgLp2u8',
@@ -80,44 +81,61 @@ export class FireBaseService {
     return get(ref(this.database, refp));
   }
 
-  OnChildAdded(
-    ref: DatabaseReference,
-    callback: (key: string | null, item: any) => unknown
-  ): Unsubscribe {
-    var internalCb = this.getEventCallBack(callback, 'Added', ref);
-    return onChildAdded(ref, internalCb, (error) => {
-      console.error(error);
-    });
-  }
-  OnChildRemoved(
-    ref: DatabaseReference,
-    callback: (key: string | null, item: any) => unknown
-  ): Unsubscribe {
-    var internalCb = this.getEventCallBack(callback, 'removed', ref);
-    return onChildRemoved(ref, internalCb, (error) => {
-      console.error(error);
-    });
-  }
-
-  OnChildChanged(
-    ref: DatabaseReference,
-    callback: (key: string | null, item: any) => unknown
-  ): Unsubscribe {
-    var internalCb = this.getEventCallBack(callback, 'updated', ref);
-    return onChildChanged(ref, internalCb, (error) => {
-      console.error(error);
+  OnChildAdded(ref: DatabaseReference): Observable<any> {
+    return new Observable<DataSnapshot>((subscriber) => {
+      var sub = onChildAdded(
+        ref,
+        (data) => {
+          console.table(data);
+          subscriber.next(data);
+        },
+        (error) => {
+          console.error(error);
+          subscriber.error(error);
+        }
+      );
+      return () => {
+        console.log('unsubscribe firebase');
+        sub();
+      };
     });
   }
 
-  private getEventCallBack(
-    callback: (key: string | null, item: any) => unknown,
-    action: string,
-    ref: DatabaseReference
-  ) {
-    return (snapshot: DataSnapshot) => {
-      console.log(`Child ${action} in ${ref.toString()}:`);
-      callback(snapshot.key, snapshot.val());
-      console.table(snapshot.val());
-    };
+  OnChildRemoved(ref: DatabaseReference): Observable<DataSnapshot> {
+    return new Observable<any>((subscriber) => {
+      var sub =  onChildRemoved(
+        ref,
+        (data) => {
+          console.table(data);
+          subscriber.next(data);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+      return () => {
+        console.log('unsubscribe firebase');
+        sub();
+      };
+    });
+  }
+
+  OnChildChanged(ref: DatabaseReference): Observable<DataSnapshot> {
+    return new Observable<any>((subscriber) => {
+      var sub =  onChildChanged(
+        ref,
+        (data) => {
+          console.table(data);
+          subscriber.next(data);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+      return () => {
+        console.log('unsubscribe firebase');
+        sub();
+      };
+    });
   }
 }

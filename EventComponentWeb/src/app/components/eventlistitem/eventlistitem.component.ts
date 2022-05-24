@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as moment from 'moment';
 import { eventEntity } from 'src/app/models/evententity.model';
 
 @Component({
@@ -12,6 +11,6 @@ export class EventlistitemComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {console.log("fdfsdfsdfsdfdssd");}
 
 }
