@@ -15,6 +15,7 @@ import { AuthService } from './services/auth.service';
 import { SigninComponent } from './components/Signin/signin.component';
 import { FourOFourComponent } from './main/four-ofour/four-ofour.component';
 import { HttpClient } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Route[] = [
   { path: 'signin', component: SigninComponent },
@@ -45,7 +46,8 @@ const appRoutes: Route[] = [
     ReactiveFormsModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
-    FirebaseModule
+    FirebaseModule,
+    BrowserAnimationsModule
   ],
   providers: [
     FormBuilder,
