@@ -34,12 +34,7 @@ export class EventAddComponent implements OnInit {
     }
 
     this.fireBaseService
-      .PushAsync(`users/${this.authService.getConnectedUserId()}/events`, {
-        name: this.addEventForm?.get('name')?.value,
-        from: this.addEventForm?.get('from')?.value,
-        to: this.addEventForm?.get('to')?.value,
-        description: this.addEventForm?.get('description')?.value,
-      })
+      .PushAsync(`users/${this.authService.getConnectedUserId()}/events`,  this.addEventForm.getRawValue())
       .then(() => {
         this.router.navigate(['events']);
       });
