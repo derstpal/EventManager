@@ -1,29 +1,23 @@
 import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
-import { FireBaseService } from './fire-base.service';
-import { Injectable, OnInit, OnDestroy } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Injectable } from '@angular/core';
 import {
   map,
   Subject,
   Observable,
   takeUntil,
-  takeWhile,
   merge,
-  mergeAll,
-  concat,
-  mergeMap,
 } from 'rxjs';
 import { eventEntity } from '../models/evententity.model';
-import { ThisReceiver } from '@angular/compiler';
-import { Unsubscribe } from 'firebase/auth';
 import { DataSnapshot } from 'firebase/database';
+import { FirebaseService } from 'src/app/firebase/services/firebase.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
   constructor(
-    private fireBaseService: FireBaseService,
+    private fireBaseService: FirebaseService,
     public authService: AuthService,
     private router: Router
   ) {}

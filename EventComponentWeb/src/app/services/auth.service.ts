@@ -1,5 +1,5 @@
+import { FirebaseService } from './../firebase/services/firebase.service';
 import { UserCredential } from 'firebase/auth';
-import { FireBaseService } from './fire-base.service';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/internal/Subject';
 import {
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService implements CanActivate {
-  constructor(private fireBaseService: FireBaseService) {}
+  constructor(private fireBaseService: FirebaseService) {}
 
   public isAuth: boolean | undefined = false;
   public userCredential: UserCredential | undefined;

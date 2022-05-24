@@ -2,14 +2,11 @@ import {
   Database,
   DataSnapshot,
   get,
-  off,
-  onValue,
   onChildAdded,
   onChildRemoved,
   onChildChanged,
   push,
   ref,
-  ThenableReference,
   DatabaseReference,
 } from 'firebase/database';
 import { getDatabase } from 'firebase/database';
@@ -20,9 +17,9 @@ import {
   createUserWithEmailAndPassword,
   UserCredential,
   signInWithEmailAndPassword,
-  Unsubscribe,
 } from 'firebase/auth';
-import { map, Observable, observable, pipe, Subscriber } from 'rxjs';
+
+import { Observable } from 'rxjs';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCzCGo7pgRVeU-Sy5ZbJ4IINlnuVgLp2u8',
@@ -35,12 +32,10 @@ const firebaseConfig = {
   appId: '1:290917298219:web:4d3766bb99f33bbb9cfa6e',
 };
 
-// Initialize Firebase
-
 @Injectable({
   providedIn: 'root',
 })
-export class FireBaseService {
+export class FirebaseService {
   private firebase: FirebaseApp;
   private auth;
   database: Database;
@@ -103,7 +98,7 @@ export class FireBaseService {
 
   OnChildRemoved(ref: DatabaseReference): Observable<DataSnapshot> {
     return new Observable<any>((subscriber) => {
-      var sub =  onChildRemoved(
+      var sub = onChildRemoved(
         ref,
         (data) => {
           console.table(data);
@@ -122,7 +117,7 @@ export class FireBaseService {
 
   OnChildChanged(ref: DatabaseReference): Observable<DataSnapshot> {
     return new Observable<any>((subscriber) => {
-      var sub =  onChildChanged(
+      var sub = onChildChanged(
         ref,
         (data) => {
           console.table(data);

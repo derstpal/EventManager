@@ -1,19 +1,19 @@
+import { FirebaseService } from './../../firebase/services/firebase.service';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FireBaseService } from './../../services/fire-base.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-add-event',
-  templateUrl: './add-event.component.html',
-  styleUrls: ['./add-event.component.scss'],
+  selector: 'app-event-add',
+  templateUrl: './event-add.component.html',
+  styleUrls: ['./event-add.component.scss']
 })
-export class AddEventComponent implements OnInit {
+export class EventAddComponent implements OnInit {
   addEventForm: FormGroup | any;
 
   constructor(
-    private fireBaseService: FireBaseService,
+    private fireBaseService: FirebaseService,
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService
