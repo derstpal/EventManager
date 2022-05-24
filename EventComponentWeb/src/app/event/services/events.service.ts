@@ -105,6 +105,6 @@ export class EventService {
 
   private createEventFromSnapshot(snapshot: DataSnapshot): eventEntity {
     const e = snapshot.val();
-    return new eventEntity(snapshot.key? snapshot.key : '', e.name, e.description, e.date);
+    return new eventEntity(snapshot.key? snapshot.key : '', e.name, e.description, e.from, e.to);
   }
 }

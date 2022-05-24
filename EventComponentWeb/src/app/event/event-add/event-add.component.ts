@@ -22,7 +22,8 @@ export class EventAddComponent implements OnInit {
   ngOnInit(): void {
     this.addEventForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
-      date: ['', [Validators.required]],
+      from: ['', [Validators.required]],
+      to: ['', [Validators.required]],
       description: ['', [Validators.maxLength(200)]],
     });
   }
@@ -35,7 +36,8 @@ export class EventAddComponent implements OnInit {
     this.fireBaseService
       .PushAsync(`users/${this.authService.getConnectedUserId()}/events`, {
         name: this.addEventForm?.get('name')?.value,
-        date: this.addEventForm?.get('date')?.value,
+        from: this.addEventForm?.get('from')?.value,
+        to: this.addEventForm?.get('to')?.value,
         description: this.addEventForm?.get('description')?.value,
       })
       .then(() => {
