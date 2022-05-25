@@ -9,15 +9,16 @@ import { EventService } from './services/events.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
-
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
     EventComponent,
     EventListComponent,
     EventListItemComponent,
-    EventAddComponent
+    EventAddComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +27,10 @@ import { AppRoutingModule } from '../app-routing.module';
     ReactiveFormsModule,
     FirebaseModule,
     AppRoutingModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
   ],
-  providers: [FormBuilder, EventService]
+  providers: [FormBuilder, EventService],
 })
-export class EventModule { }
+export class EventModule {}

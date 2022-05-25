@@ -3,8 +3,8 @@
     <h2>Add an event</h2>
     <form [formGroup]="addEventForm" (ngSubmit)="onSubmit()">
       <div>
-        <div class="form-group">
-          <label for="name">Name</label>
+        <div class="form-group form-label">
+          <label for="name" class="form-label">Name</label>
           <input
             type="text"
             id="name"
@@ -14,7 +14,7 @@
           />
         </div>
         <div class="form-group">
-          <label for="name">Description</label>
+          <label for="name" class="form-label">Description</label>
           <input
             type="text"
             id="description"
@@ -23,33 +23,40 @@
             formControlName="description"
           />
         </div>
-        <div class="form-group">
-          <label for="date">From</label>
-          <input
-            type="date"
-            id="from"
-            name="from"
-            class="form-control"
-            formControlName="from"
-          />
-        </div>
-        <div class="form-group">
-          <label for="date">To</label>
-          <input
-            type="date"
-            id="to"
-            name="to"
-            class="form-control"
-            formControlName="to"
-          />
+        <div class="form-group mt-3">
+          <mat-form-field appearance="fill" id="datePicker" textContent="Date">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input
+                matStartDate
+                placeholder="Start date"
+                id="from"
+                name="to"
+                formControlName="from"
+              />
+              <input
+                matEndDate
+                placeholder="End date"
+                id="to"
+                name="to"
+                formControlName="to"
+              />
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
         </div>
       </div>
       <button
-        class="btn btn-primary"
+        class="btn btn-primary mt-3"
         type="submit"
         [disabled]="this.addEventForm?.invalid"
       >
-      Add
+        Add
       </button>
     </form>
   </div>

@@ -16,6 +16,7 @@ import { SigninComponent } from './components/Signin/signin.component';
 import { FourOFourComponent } from './main/four-ofour/four-ofour.component';
 import { HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const appRoutes: Route[] = [
   { path: 'signin', component: SigninComponent },
@@ -47,7 +48,8 @@ const appRoutes: Route[] = [
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
     FirebaseModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDatepickerModule
   ],
   providers: [
     FormBuilder,

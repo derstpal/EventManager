@@ -1,8 +1,8 @@
 <li class="list-group-item list-group-item-action flex-column align-items-start">
   <div class="d-flex w-100 justify-content-between">
-    <h5 class="mb-1">{{ event?.name }}</h5>
+    <h3 class="mb-1">{{ event?.name }}</h3>
     <span class="badge bg-secondary">x attendees</span>
   </div>
   <p class="mb-1">{{this.event?.description}}</p>
-  <small>from {{this.event?.from}} to {{this.event?.to}} ({{this.event?.momentDate?.fromNow()}})</small>
+  <small>from {{this.event?.from | date}} to {{this.event?.to | date}} ({{this.event?.momentDate?.fromNow()}})</small>
 </li>

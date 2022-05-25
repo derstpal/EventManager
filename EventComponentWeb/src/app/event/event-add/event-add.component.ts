@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-event-add',
   templateUrl: './event-add.component.html',
-  styleUrls: ['./event-add.component.scss']
+  styleUrls: ['./event-add.component.scss'],
 })
 export class EventAddComponent implements OnInit {
   addEventForm: FormGroup | any;
@@ -32,9 +32,16 @@ export class EventAddComponent implements OnInit {
     if (this.authService.userCredential?.user === undefined) {
       return;
     }
+    console.log(this.addEventForm?.get('name')?.value);
+    console.log(this.addEventForm?.get('from')?.value);
 
     this.fireBaseService
-      .PushAsync(`users/${this.authService.getConnectedUserId()}/events`,  this.addEventForm.getRawValue())
+      .PushAsync(`users/${this.authService.getConnectedUserId()}/events`, {
+        name: this.addEventForm?.get('name')?.value,
+        from: this.addEventForm?.get('from')?.value.toISOString(),
+        to: this.addEventForm?.get('to')?.value.toISOString(),
+        description: this.addEventForm?.get('description')?.value,
+      })
       .then(() => {
         this.router.navigate(['events']);
       });
