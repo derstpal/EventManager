@@ -1,15 +1,9 @@
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Injectable } from '@angular/core';
-import {
-  map,
-  Subject,
-  Observable,
-  takeUntil,
-  merge,
-} from 'rxjs';
+import { map, Subject, Observable, takeUntil, merge } from 'rxjs';
 import { eventEntity } from '../models/evententity.model';
-import { DataSnapshot } from 'firebase/database';
+import { DataSnapshot, Query, query } from 'firebase/database';
 import { FirebaseService } from 'src/app/firebase/services/firebase.service';
 
 @Injectable({
@@ -42,10 +36,12 @@ export class EventService {
     });
   }
 
-  private getDatabaseReference() {
-    return this.fireBaseService.GetDatabaseReference(
+  private getDatabaseReference(): Query {
+    var ref = this.fireBaseService.GetDatabaseReference(
       `users/${this.authService.getConnectedUserId()}/events`
     );
+
+    return query(ref);
   }
 
   OnEventAdded(): Observable<eventEntity> {
@@ -76,8 +72,7 @@ export class EventService {
   }
 
   OnEventList() {
-    //var events = new Map<string | null, eventEntity>();
-    var events : eventEntity[] = [];
+    var events: eventEntity[] = [];
     return merge(
       this.OnEventAdded().pipe(
         map((e) => {
@@ -88,14 +83,14 @@ export class EventService {
       ),
       this.OnEventChanged().pipe(
         map((e) => {
-          var index = events.findIndex(e => e.key == e.key);
+          var index = events.findIndex((e) => e.key == e.key);
           events[index] = e;
           return events;
         })
       ),
       this.OnEventRemoved().pipe(
         map((e) => {
-          var index = events.findIndex(e => e.key == e.key);
+          var index = events.findIndex((e) => e.key == e.key);
           events.splice(index, 1);
           return events;
         })
@@ -105,6 +100,12 @@ export class EventService {
 
   private createEventFromSnapshot(snapshot: DataSnapshot): eventEntity {
     const e = snapshot.val();
-    return new eventEntity(snapshot.key? snapshot.key : '', e.name, e.description, new Date(e.from), new Date(e.to));
+    return new eventEntity(
+      snapshot.key ? snapshot.key : '',
+      e.name,
+      e.description,
+      new Date(e.from),
+      new Date(e.to)
+    );
   }
 }
