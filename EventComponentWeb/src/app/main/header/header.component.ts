@@ -8,21 +8,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit, OnInit, OnDestroy {
-  constructor(private authService: AuthService, private router: Router) {}
-
-  isAuth: Boolean | undefined;
-  isAuthSubscription: Subscription | undefined;
+export class HeaderComponent implements OnInit {
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.isAuthSubscription = this.authService.isAuthSubject.subscribe(
-      (value) => {
-        this.isAuth = value;
-      }
-    );
-  }
-  ngOnDestroy(): void {
-    this.isAuthSubscription?.unsubscribe();
   }
 
   Signout() {
