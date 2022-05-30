@@ -32,18 +32,15 @@ export class EventAddComponent implements OnInit {
     if (this.authService.userCredential?.user === undefined) {
       return;
     }
-    console.log(this.addEventForm?.get('name')?.value);
-    console.log(this.addEventForm?.get('from')?.value);
+    var payload = {
+      name: this.addEventForm?.get('name')?.value,
+      from: this.addEventForm?.get('from')?.value.toISOString(),
+      to: this.addEventForm?.get('to')?.value.toISOString(),
+      description: this.addEventForm?.get('description')?.value,
+    };
 
-    this.fireBaseService
-      .PushAsync(`users/${this.authService.getConnectedUserId()}/events`, {
-        name: this.addEventForm?.get('name')?.value,
-        from: this.addEventForm?.get('from')?.value.toISOString(),
-        to: this.addEventForm?.get('to')?.value.toISOString(),
-        description: this.addEventForm?.get('description')?.value,
-      })
-      .then(() => {
-        this.router.navigate(['events']);
-      });
+    this.fireBaseService.PushAsync(`users/${this.authService.getConnectedUserId()}/events`, payload).then(() => {
+      this.router.navigate(['events']);
+    });
   }
 }

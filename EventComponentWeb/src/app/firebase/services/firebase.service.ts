@@ -8,6 +8,7 @@ import {
   push,
   ref,
   DatabaseReference,
+  Query,
 } from 'firebase/database';
 import { getDatabase } from 'firebase/database';
 import { Injectable } from '@angular/core';
@@ -76,7 +77,7 @@ export class FirebaseService {
     return get(ref(this.database, refp));
   }
 
-  OnChildAdded(ref: DatabaseReference): Observable<any> {
+  OnChildAdded(ref: Query): Observable<any> {
     return new Observable<DataSnapshot>((subscriber) => {
       var sub = onChildAdded(
         ref,
@@ -96,7 +97,7 @@ export class FirebaseService {
     });
   }
 
-  OnChildRemoved(ref: DatabaseReference): Observable<DataSnapshot> {
+  OnChildRemoved(ref: Query): Observable<DataSnapshot> {
     return new Observable<any>((subscriber) => {
       var sub = onChildRemoved(
         ref,
@@ -115,7 +116,7 @@ export class FirebaseService {
     });
   }
 
-  OnChildChanged(ref: DatabaseReference): Observable<DataSnapshot> {
+  OnChildChanged(ref: Query): Observable<DataSnapshot> {
     return new Observable<any>((subscriber) => {
       var sub = onChildChanged(
         ref,
