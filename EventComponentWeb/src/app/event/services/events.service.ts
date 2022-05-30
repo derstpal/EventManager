@@ -101,7 +101,7 @@ export class EventService {
   private createEventFromSnapshot(snapshot: DataSnapshot): eventEntity {
     const e = snapshot.val();
     return new eventEntity(
-      snapshot.key ? snapshot.key : '',
+      snapshot.key ?? '',
       e.name,
       e.description,
       new Date(e.from),
