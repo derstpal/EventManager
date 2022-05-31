@@ -23,6 +23,7 @@ export class PeopleAddComponent implements OnInit {
     this.addPeopleForm = this.formBuilder.group({
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
+      email: ['', [Validators.email]],
     });
   }
 
@@ -33,6 +34,7 @@ export class PeopleAddComponent implements OnInit {
     var payload = {
       firstname: this.addPeopleForm?.get('firstname')?.value,
       lastname: this.addPeopleForm?.get('lastname')?.value,
+      email: this.addPeopleForm?.get('email')?.value,
     };
 
     this.fireBaseService
