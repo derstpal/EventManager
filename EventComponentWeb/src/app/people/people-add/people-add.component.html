@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-1">
+    <h2>Add a people</h2>
+    <form [formGroup]="addPeopleForm" (ngSubmit)="onSubmit()">
+      <div>
+        <div class="form-floating mt-3">
+          <input
+          type="text"
+          id="firstname"
+          name="firstname"
+          class="form-control"
+          formControlName="firstname"
+          placeholder="your firstname"
+          />
+          <label for="firstname" class="form-label">Firstname</label>
+        </div>
+        <div class="form-floating mt-3">
+          <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          class="form-control"
+          formControlName="lastname"
+          placeholder="your lastname"
+          />
+          <label for="lastname" class="form-label">Lastname</label>
+        </div>
+      </div>
+      <button
+        class="btn btn-primary mt-3"
+        type="submit"
+        [disabled]="this.addPeopleForm?.invalid"
+      >
+        Add
+      </button>
+    </form>
+  </div>
+</div>

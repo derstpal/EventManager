@@ -29,6 +29,24 @@
           >Add event</a
         >
       </li>
+      <li class="nav-item">
+        <a
+        *ngIf="(this.authService.isAuthSubject | async) === true"
+          routerLinkActive="active"
+          class="nav-item nav-link"
+          routerLink="peoples"
+          >Peoples</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+        *ngIf="(this.authService.isAuthSubject | async) === true"
+          routerLinkActive="active"
+          class="nav-item nav-link"
+          routerLink="addPeople"
+          >Add people</a
+        >
+      </li>
     </ul>
     <ul class="navbar-nav ">
       <li class="nav-item">

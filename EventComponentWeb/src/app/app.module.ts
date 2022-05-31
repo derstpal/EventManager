@@ -1,3 +1,6 @@
+import { PeopleModule } from './people/people.module';
+import { PeopleListComponent } from './people/people-list/people-list.component';
+import { PeopleAddComponent } from './people/people-add/people-add.component';
 import { EventModule } from './event/event.module';
 import { FirebaseModule } from './firebase/firebase.module';
 import { EventAddComponent } from './event/event-add/event-add.component';
@@ -28,6 +31,12 @@ const appRoutes: Route[] = [
     component: EventAddComponent,
     canActivate: [AuthService],
   },
+  { path: 'peoples', component: PeopleListComponent , canActivate: [AuthService] },
+  {
+    path: 'addPeople',
+    component: PeopleAddComponent,
+    canActivate: [AuthService],
+  },
   { path: '**', component: FourOFourComponent },
 ];
 
@@ -41,6 +50,7 @@ const appRoutes: Route[] = [
     FourOFourComponent,
   ],
   imports: [
+    PeopleModule,
     EventModule,
     BrowserModule,
     FormsModule,

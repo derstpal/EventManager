@@ -3,25 +3,25 @@
     <h2>Add an event</h2>
     <form [formGroup]="addEventForm" (ngSubmit)="onSubmit()">
       <div>
-        <div class="form-group form-label">
+        <div class="form-floating mt-3">
+          <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          formControlName="name"
+          />
           <label for="name" class="form-label">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="form-control"
-            formControlName="name"
-          />
         </div>
-        <div class="form-group">
-          <label for="name" class="form-label">Description</label>
+        <div class="form-floating mt-3">
           <input
-            type="text"
-            id="description"
-            name="description"
-            class="form-control form-text"
-            formControlName="description"
+          type="text"
+          id="description"
+          name="description"
+          class="form-control form-text"
+          formControlName="description"
           />
+          <label for="name" class="form-label">Description</label>
         </div>
         <div class="form-group mt-3">
           <mat-form-field appearance="fill" id="datePicker" textContent="Date">
@@ -31,7 +31,7 @@
                 matStartDate
                 placeholder="Start date"
                 id="from"
-                name="to"
+                name="from"
                 formControlName="from"
               />
               <input
