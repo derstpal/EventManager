@@ -1,3 +1,4 @@
+import { EventComponent } from './event/event/event.component';
 import { PeopleModule } from './people/people.module';
 import { PeopleListComponent } from './people/people-list/people-list.component';
 import { PeopleAddComponent } from './people/people-add/people-add.component';
@@ -20,22 +21,37 @@ import { FourOFourComponent } from './main/four-ofour/four-ofour.component';
 import { HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { PeopleComponent } from './people/people/people.component';
 
 const appRoutes: Route[] = [
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: '404', component: FourOFourComponent },
-  { path: 'events', component: EventListComponent , canActivate: [AuthService] },
   {
-    path: 'addEvent',
-    component: EventAddComponent,
+    path: 'events',
+    component: EventComponent,
     canActivate: [AuthService],
+    children: [
+      {
+        path: 'addEvent',
+        component: EventAddComponent,
+        canActivate: [AuthService],
+
+      },
+    ],
   },
-  { path: 'peoples', component: PeopleListComponent , canActivate: [AuthService] },
   {
-    path: 'addPeople',
-    component: PeopleAddComponent,
+    path: 'peoples',
+    component: PeopleComponent,
     canActivate: [AuthService],
+    children: [
+      {
+        path: 'addPeople',
+        component: PeopleAddComponent,
+        canActivate: [AuthService],
+
+      },
+    ],
   },
   { path: '**', component: FourOFourComponent },
 ];
@@ -59,12 +75,9 @@ const appRoutes: Route[] = [
     RouterModule.forRoot(appRoutes),
     FirebaseModule,
     BrowserAnimationsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
-  providers: [
-    FormBuilder,
-    HttpClient,
-  ],
+  providers: [FormBuilder, HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

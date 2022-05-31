@@ -21,19 +21,24 @@ export class EventService {
     eventEntity
   >();
 
-  public eventsSubject: Subject<eventEntity[]> = new Subject<eventEntity[]>();
-
-  public emitEventsSubject() {
-    this.eventsSubject.next(Array.from(this.events.values()));
-  }
-
   createEventAsync(newEvent: eventEntity): Promise<void> {
     if (this.authService.userCredential?.user === undefined) {
       return Promise.resolve();
     }
-    return this.fireBaseService.PushAsync('events', newEvent).then((key) => {
-      this.router.navigate(['events']);
-    });
+    var payload = {
+      name: newEvent.name,
+      from: newEvent.from.toISOString(),
+      to: newEvent.to.toISOString(),
+      description: newEvent.description,
+    };
+    return this.fireBaseService
+      .PushAsync(
+        `users/${this.authService.getConnectedUserId()}/events`,
+        payload
+      )
+      .then(() => {
+        this.router.navigate(['events']);
+      });
   }
 
   private getDatabaseReference(): Query {

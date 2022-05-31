@@ -1,3 +1,5 @@
+import { eventEntity } from './../models/evententity.model';
+import { EventService } from './../services/events.service';
 import { FirebaseService } from './../../firebase/services/firebase.service';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
@@ -13,7 +15,7 @@ export class EventAddComponent implements OnInit {
   addEventForm: FormGroup | any;
 
   constructor(
-    private fireBaseService: FirebaseService,
+    private eventService: EventService,
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService
@@ -32,20 +34,13 @@ export class EventAddComponent implements OnInit {
     if (this.authService.userCredential?.user === undefined) {
       return;
     }
-    var payload = {
-      name: this.addEventForm?.get('name')?.value,
-      from: this.addEventForm?.get('from')?.value.toISOString(),
-      to: this.addEventForm?.get('to')?.value.toISOString(),
-      description: this.addEventForm?.get('description')?.value,
-    };
-
-    this.fireBaseService
-      .PushAsync(
-        `users/${this.authService.getConnectedUserId()}/events`,
-        payload
-      )
-      .then(() => {
-        this.router.navigate(['events']);
-      });
+    var nexEvent = new eventEntity(
+      '',
+      this.addEventForm?.get('name')?.value,
+      this.addEventForm?.get('description')?.value,
+      this.addEventForm?.get('from')?.value,
+      this.addEventForm?.get('to')?.value
+    );
+    this.eventService.createEventAsync(nexEvent);
   }
 }

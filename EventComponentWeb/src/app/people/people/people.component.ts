@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-event',
-  templateUrl: './event.component.html',
-  styleUrls: ['./event.component.scss'],
+  selector: 'app-people',
+  templateUrl: './people.component.html',
+  styleUrls: ['./people.component.scss'],
 })
-export class EventComponent implements OnInit {
+export class PeopleComponent implements OnInit {
   @ViewChild('closebutton') closeButton: ElementRef | undefined;
 
   constructor() {}

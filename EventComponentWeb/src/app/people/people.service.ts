@@ -1,3 +1,4 @@
+import { FirebaseService } from 'src/app/firebase/services/firebase.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class PeopleService {
 
-  constructor() { }
+
+  constructor(public firebaseService : FirebaseService) { }
+
+
 }

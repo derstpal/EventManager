@@ -11,6 +11,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { PeopleComponent } from './people/people.component';
 
 
 
@@ -18,7 +19,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   declarations: [
     PeopleAddComponent,
     PeopleListComponent,
-    PeopleListItemComponent
+    PeopleListItemComponent,
+    PeopleComponent
   ],
   imports: [
     CommonModule,
