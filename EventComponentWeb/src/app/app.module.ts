@@ -1,3 +1,6 @@
+import { PeopleInEventModule } from './people-in-event/people-in-event.module';
+import { PeopleInEventComponent } from './people-in-event/components/people-in-event/people-in-event.component';
+import { InviteComponent } from './people-in-event/components/invite/invite.component';
 import { EventComponent } from './event/event/event.component';
 import { PeopleModule } from './people/people.module';
 import { PeopleAddComponent } from './people/people-add/people-add.component';
@@ -36,7 +39,6 @@ const appRoutes: Route[] = [
         path: 'addEvent',
         component: EventAddComponent,
         canActivate: [AuthService],
-
       },
     ],
   },
@@ -49,7 +51,18 @@ const appRoutes: Route[] = [
         path: 'addPeople',
         component: PeopleAddComponent,
         canActivate: [AuthService],
-
+      },
+    ],
+  },
+  {
+    path: 'peoplesInEvent/:id',
+    component: PeopleInEventComponent,
+    canActivate: [AuthService],
+    children: [
+      {
+        path: 'invite',
+        component: InviteComponent,
+        canActivate: [AuthService],
       },
     ],
   },
@@ -68,6 +81,7 @@ const appRoutes: Route[] = [
   imports: [
     PeopleModule,
     EventModule,
+    PeopleInEventModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -75,7 +89,7 @@ const appRoutes: Route[] = [
     RouterModule.forRoot(appRoutes),
     FirebaseModule,
     BrowserAnimationsModule,
-        MatDatepickerModule,
+    MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
   ],
