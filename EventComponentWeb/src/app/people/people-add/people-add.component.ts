@@ -1,3 +1,5 @@
+import { PeopleService } from './../people.service';
+import { peopleEntity } from './../models/peopleEntity';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,9 +15,8 @@ export class PeopleAddComponent implements OnInit {
   addPeopleForm: FormGroup | any;
 
   constructor(
-    private fireBaseService: FirebaseService,
+    private peopleService: PeopleService,
     private formBuilder: FormBuilder,
-    private router: Router,
     private authService: AuthService
   ) {}
 
@@ -24,6 +25,7 @@ export class PeopleAddComponent implements OnInit {
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       email: ['', [Validators.email]],
+      birthday : [''],
     });
   }
 
@@ -31,19 +33,14 @@ export class PeopleAddComponent implements OnInit {
     if (this.authService.userCredential?.user === undefined) {
       return;
     }
-    var payload = {
-      firstname: this.addPeopleForm?.get('firstname')?.value,
-      lastname: this.addPeopleForm?.get('lastname')?.value,
-      email: this.addPeopleForm?.get('email')?.value,
-    };
 
-    this.fireBaseService
-      .PushAsync(
-        `users/${this.authService.getConnectedUserId()}/peoples`,
-        payload
-      )
-      .then(() => {
-        this.router.navigate(['peoples']);
-      });
+    var people = new peopleEntity('',
+      this.addPeopleForm?.get('firstname')?.value,
+      this.addPeopleForm?.get('lastname')?.value,
+      this.addPeopleForm?.get('email')?.value,
+      this.addPeopleForm?.get('birthday')?.value
+    );
+
+    this.peopleService.createPeopleAsync(people);
   }
 }

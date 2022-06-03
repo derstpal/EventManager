@@ -36,6 +36,25 @@
           />
           <label for="email" class="form-label">Email</label>
         </div>
+        <div class="form-group mt-3">
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker2"
+              id="birthday"
+              name="birthday"
+              formControlName="birthday"
+              placeholder="your birthday"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker2"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
       </div>
       <button
         class="btn btn-primary mt-3"

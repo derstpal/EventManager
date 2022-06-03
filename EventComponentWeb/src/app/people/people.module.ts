@@ -11,6 +11,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { PeopleComponent } from './people/people.component';
 
 
@@ -32,6 +33,7 @@ import { PeopleComponent } from './people/people.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
+    MatInputModule
   ],
   providers: [FormBuilder, PeopleService],
 })

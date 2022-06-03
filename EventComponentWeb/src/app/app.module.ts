@@ -1,11 +1,9 @@
 import { EventComponent } from './event/event/event.component';
 import { PeopleModule } from './people/people.module';
-import { PeopleListComponent } from './people/people-list/people-list.component';
 import { PeopleAddComponent } from './people/people-add/people-add.component';
 import { EventModule } from './event/event.module';
 import { FirebaseModule } from './firebase/firebase.module';
 import { EventAddComponent } from './event/event-add/event-add.component';
-import { EventListComponent } from './event/event-list/event-list.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -21,6 +19,8 @@ import { FourOFourComponent } from './main/four-ofour/four-ofour.component';
 import { HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { PeopleComponent } from './people/people/people.component';
 
 const appRoutes: Route[] = [
@@ -75,7 +75,9 @@ const appRoutes: Route[] = [
     RouterModule.forRoot(appRoutes),
     FirebaseModule,
     BrowserAnimationsModule,
-    MatDatepickerModule,
+        MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
   ],
   providers: [FormBuilder, HttpClient],
   bootstrap: [AppComponent],

@@ -6,11 +6,8 @@ import { eventEntity } from '../models/evententity.model';
   templateUrl: './event-list-item.component.html',
   styleUrls: ['./event-list-item.component.scss']
 })
-export class EventListItemComponent  implements OnInit {
+export class EventListItemComponent {
   @Input() event: eventEntity | undefined;
 
   constructor() {}
-
-  ngOnInit(): void {}
-
 }

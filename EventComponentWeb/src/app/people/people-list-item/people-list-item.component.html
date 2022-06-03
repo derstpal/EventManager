@@ -1,1 +1,6 @@
-<p>people-list-item works!</p>
+<li class="list-group-item list-group-item-action flex-column align-items-start">
+  <div class="d-flex w-100 justify-content-between">
+    <h3 class="mb-1">{{ people?.firstName }} {{ people?.lastName }}</h3>
+  </div>
+  <small>Age: ({{this.people?.momentDate?.fromNow()}})</small>
+</li>
