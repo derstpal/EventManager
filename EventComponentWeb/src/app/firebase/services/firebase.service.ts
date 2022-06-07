@@ -82,7 +82,7 @@ export class FirebaseService {
       var sub = onChildAdded(
         ref,
         (data) => {
-          console.table(data);
+          console.table(data.val());
           subscriber.next(data);
         },
         (error) => {
@@ -102,7 +102,7 @@ export class FirebaseService {
       var sub = onChildRemoved(
         ref,
         (data) => {
-          console.table(data);
+          console.table(data.val());
           subscriber.next(data);
         },
         (error) => {
@@ -121,7 +121,7 @@ export class FirebaseService {
       var sub = onChildChanged(
         ref,
         (data) => {
-          console.table(data);
+          console.table(data.val());
           subscriber.next(data);
         },
         (error) => {

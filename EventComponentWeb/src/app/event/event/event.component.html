@@ -13,7 +13,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"></h5>
+          <h2 class="modal-title em-header-pl"></h2>
           <button
             id="closebutton"
             #closebutton
@@ -24,9 +24,9 @@
           ></button>
         </div>
         <div class="modal-body">
-          <router-outlet (deactivate)="onSubRootDeactivate()"></router-outlet>
+          <router-outlet (deactivate)="onSubRootDeactivate()" (activate)="onSubRootActivate()"></router-outlet>
         </div>
-        <div class="modal-footer"></div>
+        <div class="modal-footer em-footer-pl"></div>
       </div>
     </div>
   </div>

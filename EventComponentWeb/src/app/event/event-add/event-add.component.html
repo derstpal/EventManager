@@ -1,27 +1,27 @@
 <div class="row">
   <div class="col-sm">
-    <h2>Add an event</h2>
-    <form [formGroup]="addEventForm" (ngSubmit)="onSubmit()">
+    <h2 class="em-header">Add an event</h2>
+    <form [formGroup]="addEventForm">
       <div>
         <div class="form-floating mt-3">
           <input
-          type="text"
-          id="name"
-          name="name"
-          class="form-control"
-          formControlName="name"
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            formControlName="name"
           />
           <label for="name" class="form-label">Name</label>
         </div>
         <div class="form-floating mt-3">
           <textarea
-          rows="5"
-          type="text"
-          id="description"
-          name="description"
-          class="form-control form-text"
-          formControlName="description"
-          style="height: 250px;"
+            rows="5"
+            type="text"
+            id="description"
+            name="description"
+            class="form-control form-text"
+            formControlName="description"
+            style="height: 250px"
           ></textarea>
           <label for="name" class="form-label">Description</label>
         </div>
@@ -53,13 +53,16 @@
           </mat-form-field>
         </div>
       </div>
+    </form>
+    <div class="em-button-container">
       <button
         class="btn btn-primary mt-3"
-        type="submit"
+        type="button"
         [disabled]="this.addEventForm?.invalid"
+        (click)="onSubmit()"
       >
         Add
       </button>
-    </form>
+    </div>
   </div>
 </div>
