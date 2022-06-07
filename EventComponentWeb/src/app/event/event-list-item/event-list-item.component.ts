@@ -4,10 +4,9 @@ import { eventEntity } from '../models/evententity.model';
 @Component({
   selector: 'app-event-list-item',
   templateUrl: './event-list-item.component.html',
-  styleUrls: ['./event-list-item.component.scss']
+  styleUrls: ['./event-list-item.component.scss'],
 })
 export class EventListItemComponent {
   @Input() event: eventEntity | undefined;
-
   constructor() {}
 }
