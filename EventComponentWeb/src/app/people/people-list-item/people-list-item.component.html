@@ -2,5 +2,6 @@
   <div class="d-flex w-100 justify-content-between">
     <h3 class="mb-1">{{ people?.firstName }} {{ people?.lastName }}</h3>
   </div>
+  <p> email: {{this.people?.email }}</p>
   <small>Age: {{  this.today.diff(this.people?.momentDate, 'years') }} years old</small>
 </li>
