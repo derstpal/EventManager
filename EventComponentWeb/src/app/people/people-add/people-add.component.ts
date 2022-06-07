@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class PeopleAddComponent implements OnInit {
   addPeopleForm: FormGroup | any;
-
+  maxDate: Date = new Date();
   constructor(
     private peopleService: PeopleService,
     private formBuilder: FormBuilder,
