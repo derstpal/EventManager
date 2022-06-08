@@ -20,3 +20,7 @@ div.em-footer-pl{}//class placeholder for footer.
 p.em-header-pl{}//class placeholder for header.
 div.em-button-container{} //container for buttons
 p.em-header{} //container for header
+
+div.em-selected{
+  background-color: var(--bs-primary);
+}
