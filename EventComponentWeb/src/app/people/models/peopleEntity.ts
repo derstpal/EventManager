@@ -2,6 +2,7 @@ import * as moment from 'moment';
 
 export class peopleEntity {
   public momentDate: moment.Moment;
+  public isSelected : Boolean = false;
   constructor(
     public key: string,
     public firstName: string,
