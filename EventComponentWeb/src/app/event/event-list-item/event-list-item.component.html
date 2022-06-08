@@ -1,8 +1,32 @@
-<li class="list-group-item list-group-item-action flex-column align-items-start">
-  <div class="d-flex w-100 justify-content-between">
-    <h3 class="mb-1">{{ event?.name }}</h3>
-    <span class="badge bg-secondary">x attendees</span>
+<li
+  class="list-group-item mt-1"
+  [attr.data-event]="event"
+  [attr.data-isselected]="this.event.isSelected"
+  (click)="selectPeople.click()"
+>
+  <div class="d-flex w-100 flex-row">
+    <div
+      style="width: 5px"
+      [ngClass]="
+        this.event.isSelected && this.hasSelection ? 'em-selected' : ''
+      "
+    ></div>
+    <div class="p-2 d-flex w-100 flex-column">
+      <input
+        #selectPeople
+        title="Select this event"
+        type="checkbox"
+        [(ngModel)]="this.event.isSelected"
+        style="display: none"
+      />
+      <h3 class="mb-1">{{ event?.name }}</h3>
+      <p class="mb-1">{{ this.event?.description }}</p>
+      <small
+        >from {{ this.event?.from | date }} to {{ this.event?.to | date }} ({{
+          this.event?.momentDate?.fromNow()
+        }})</small
+      >
+    </div>
+    <span class="badge bg-secondary align-self-start">x attendees</span>
   </div>
-  <p class="mb-1">{{this.event?.description}}</p>
-  <small>from {{this.event?.from | date}} to {{this.event?.to | date}} ({{this.event?.momentDate?.fromNow()}})</small>
 </li>

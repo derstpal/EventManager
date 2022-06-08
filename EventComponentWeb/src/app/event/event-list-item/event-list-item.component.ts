@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { eventEntity } from '../models/evententity.model';
 
 @Component({
@@ -7,6 +7,7 @@ import { eventEntity } from '../models/evententity.model';
   styleUrls: ['./event-list-item.component.scss'],
 })
 export class EventListItemComponent {
-  @Input() event: eventEntity | undefined;
+  @Input() event!: eventEntity;
+  @Input() hasSelection: Boolean = false;
   constructor() {}
 }

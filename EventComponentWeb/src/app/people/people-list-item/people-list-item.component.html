@@ -1,5 +1,5 @@
 <li
-  class="list-group-item"
+  class="list-group-item  mt-1"
   [attr.data-people]="people"
   [attr.data-isselected]="this.people.isSelected"
   (click)="selectPeople.click()"
@@ -7,7 +7,7 @@
   <div class="d-flex w-100 flex-row">
     <div
           style="width: 5px;"
-          [ngClass]="this.people.isSelected ? 'em-selected' : ''"
+          [ngClass]="this.people.isSelected && this.hasSelection ? 'em-selected' : ''"
         ></div>
     <div class="p-2 d-flex w-100 flex-column">
       <div class="d-flex w-100 justify-content-start">

@@ -17,10 +17,7 @@ import * as moment from 'moment';
 export class PeopleListItemComponent {
   @Input()
   people!: peopleEntity;
-  @Input() hasSelection: Boolean | undefined;
-
-  background: string = 'transparent';
-
+  @Input() hasSelection: Boolean = false;
   today: moment.Moment = moment(new Date());
   constructor() {
   }
