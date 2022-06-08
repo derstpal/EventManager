@@ -35,6 +35,7 @@ import { PeopleComponent } from './people/people.component';
     MatFormFieldModule,
     MatInputModule
   ],
+  exports:[PeopleListComponent],
   providers: [FormBuilder, PeopleService],
 })
 export class PeopleModule { }

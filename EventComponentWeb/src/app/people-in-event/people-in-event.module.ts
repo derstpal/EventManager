@@ -1,3 +1,4 @@
+import { PeopleModule } from './../people/people.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InviteComponent } from './components/invite/invite.component';
@@ -22,6 +23,7 @@ import { AppRoutingModule } from '../app-routing.module';
     BrowserModule,
     FirebaseModule,
     AppRoutingModule,
+    PeopleModule
   ],
   providers: [],
 })

@@ -1,7 +1,31 @@
-<li class="list-group-item list-group-item-action flex-column align-items-start">
-  <div class="d-flex w-100 justify-content-between">
-    <h3 class="mb-1">{{ people?.firstName }} {{ people?.lastName }}</h3>
+<li
+  class="list-group-item"
+  [attr.data-people]="people"
+  [attr.data-isselected]="isSelected"
+  (click)="selectPeople.click()"
+>
+  <div class="d-flex w-100 flex-row">
+    <div #selectpeopleDiv
+          style="width: 5px;"
+          [style.background-color] = "this.background"
+        ></div>
+    <div class="p-2 d-flex w-100 flex-column">
+      <div class="d-flex w-100 justify-content-start">
+                <input
+          #selectPeople
+          title="Select this people"
+          type="checkbox"
+          [checked]="this.isSelected"
+          (change)="this.onSelectChange(selectPeople.checked)"
+          style="display: none;"
+        />
+        <h3 class="mb-1">{{ people?.firstName }} {{ people?.lastName }}</h3>
+      </div>
+      <p>email: {{ this.people?.email }}</p>
+      <small
+        >Age: {{ this.today.diff(this.people?.momentDate, "years") }} years
+        old</small
+      >
+    </div>
   </div>
-  <p> email: {{this.people?.email }}</p>
-  <small>Age: {{  this.today.diff(this.people?.momentDate, 'years') }} years old</small>
 </li>

@@ -1,5 +1,5 @@
 import { peopleEntity } from './../models/peopleEntity';
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -9,6 +9,20 @@ import * as moment from 'moment';
 })
 export class PeopleListItemComponent {
   @Input() people: peopleEntity | undefined;
+  @Input() hasSelection: Boolean | undefined;
+  @Output() isSelectedEvent = new EventEmitter<boolean>();
+  background : string = 'transparent';
+
+  isSelected : boolean = false;
   today: moment.Moment = moment(new Date());
-  constructor() {}
+  constructor() {
+  }
+
+  onSelectChange(value : boolean)
+  {
+    this.isSelected = value;
+    this.background = value? '#0d6efd' : 'transparent';
+    console.log(`Selection ${this.isSelected} on ${this.people?.key}`);
+    this.isSelectedEvent.emit(value);
+  }
 }

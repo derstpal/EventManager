@@ -35,8 +35,6 @@ export class PeopleInEventComponent implements OnInit, OnDestroy {
       var invited = peopleIn.filter(e => e.invited === true).map(e => e.peopleKey);
       return this.peopleService.OnPeopleList().pipe(map(allpeoples => allpeoples.filter(all => invited.some(i => i === all.key))));
       }));
-
-
   }
 
   ngOnInit(): void {}
