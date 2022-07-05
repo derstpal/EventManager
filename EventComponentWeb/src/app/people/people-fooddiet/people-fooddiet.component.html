@@ -1,0 +1,62 @@
+<div class="form-floating mt-3">
+  <span class="form-label">Diet</span>
+  <div class="form-check">
+    <input
+      type="radio"
+      id="none"
+      name="foodHabit"
+      class="form-check-input"
+      [checked]="diet === FoodDietEnum.none || diet === undefined"
+      (input)="selectDiet(FoodDietEnum.none)"
+    />
+    <label for="none" class="form-check-label">None</label>
+  </div>
+  <div class="form-check">
+    <input
+      type="radio"
+      id="veggie"
+      value="veggie"
+      name="foodHabit"
+      class="form-check-input"
+      [checked]="diet === FoodDietEnum.veggie"
+      (input)="selectDiet(FoodDietEnum.veggie)"
+    />
+    <label for="veggie" class="form-check-label">Veggie</label>
+  </div>
+  <div class="form-check">
+    <input
+      type="radio"
+      id="vegan"
+      value="vegan"
+      name="foodHabit"
+      class="form-check-input"
+      [checked]="diet === FoodDietEnum.vegan"
+      (input)="selectDiet(FoodDietEnum.vegan)"
+    />
+    <label for="vegan" class="form-check-label">Vegan</label>
+  </div>
+  <div class="form-check">
+    <input
+      type="radio"
+      id="noPork"
+      value="noPork"
+      name="foodHabit"
+      class="form-check-input"
+      [checked]="diet === FoodDietEnum.noPork"
+      (input)="selectDiet(FoodDietEnum.noPork)"
+    />
+    <label for="noPork" class="form-check-label">No pork</label>
+  </div>
+  <div class="form-check">
+    <input
+      type="radio"
+      id="noBeef"
+      value="noBeef"
+      name="foodHabit"
+      class="form-check-input"
+      [checked]="diet === FoodDietEnum.noBeef"
+      (input)="selectDiet(FoodDietEnum.noBeef)"
+    />
+    <label for="noBeef" class="form-check-label">No Beef</label>
+  </div>
+</div>

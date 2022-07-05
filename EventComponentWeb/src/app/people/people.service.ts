@@ -1,3 +1,5 @@
+import { Gender } from './models/gender.enum';
+import { Diet } from './models/diet.enum';
 import { DataSnapshot, query, Query } from 'firebase/database';
 import { FirebaseService } from 'src/app/firebase/services/firebase.service';
 import { Injectable } from '@angular/core';
@@ -29,7 +31,9 @@ export class PeopleService {
       firstname: newPeople.firstName,
       lastname: newPeople.lastName,
       birthday: newPeople.birthDay.toISOString(),
-      email : newPeople.email
+      email : newPeople.email,
+      diet: Diet[newPeople.diet],
+      gender :Gender[newPeople.gender],
     };
     return this.fireBaseService
       .PushAsync(
@@ -110,7 +114,9 @@ export class PeopleService {
       e.firstname,
       e.lastname,
       e.email,
-      new Date(e.birthday)
+      new Date(e.birthday),
+      <Diet> e.diet,
+      <Gender> e.gender,
     );
   }
 }

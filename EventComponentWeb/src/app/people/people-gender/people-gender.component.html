@@ -1,0 +1,36 @@
+<div>
+  <span class="form-label">Gender</span>
+  <div class="form-check">
+    <input
+      type="radio"
+      id="unknown"
+      name="gender"
+      class="form-check-input"
+      [checked]="(gender === GenderEnum.unknown) || gender === undefined"
+      (input)="selectGender(GenderEnum.unknown)"
+    />
+    <label for="unknown" class="form-check-label">Unknown</label>
+  </div>
+  <div class="form-check">
+    <input
+      type="radio"
+      id="male"
+      name="gender"
+      class="form-check-input"
+      [checked]="gender === GenderEnum.male"
+      (input)="selectGender(GenderEnum.male)"
+    />
+    <label for="male" class="form-check-label">Male</label>
+  </div>
+  <div class="form-check">
+    <input
+      type="radio"
+      id="female"
+      name="gender"
+      class="form-check-input"
+      [checked]="gender === GenderEnum.female"
+      (input)="selectGender(GenderEnum.female)"
+    />
+    <label for="female" class="form-check-label">Female</label>
+  </div>
+</div>

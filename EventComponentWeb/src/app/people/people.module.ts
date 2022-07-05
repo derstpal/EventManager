@@ -13,6 +13,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PeopleComponent } from './people/people.component';
+import { PeopleGenderComponent } from './people-gender/people-gender.component';
+import { PeopleFoodComponent } from './people-fooddiet/people-fooddiet.component';
 
 
 
@@ -21,7 +23,9 @@ import { PeopleComponent } from './people/people.component';
     PeopleAddComponent,
     PeopleListComponent,
     PeopleListItemComponent,
-    PeopleComponent
+    PeopleComponent,
+    PeopleGenderComponent,
+    PeopleFoodComponent,
   ],
   imports: [
     CommonModule,
