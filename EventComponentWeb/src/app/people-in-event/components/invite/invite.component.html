@@ -1,11 +1,9 @@
 <div class="d-flex flex-column h-100">
-  <app-people-list style="flex: 1 1 200px;overflow: auto;"></app-people-list>
+  <app-people-list style="flex: 1 1 200px;overflow: auto;" [hasSelection]="true" [(selectedPeoples)]="selectedPeoples" ></app-people-list>
   <button
     class="btn btn-primary"
-    data-bs-toggle="modal"
-    data-bs-target="#peoplecompModal"
-    [routerLink]="['/peoples/addPeople']"
+    (click)="inviteAsync()"
   >
-    Add people
+    Invite
   </button>
 </div>

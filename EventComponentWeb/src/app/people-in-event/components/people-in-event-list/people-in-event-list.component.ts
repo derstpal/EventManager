@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { peopleEntity } from './../../../people/models/peopleEntity';
 import { Component, OnInit , Input} from '@angular/core';
 
@@ -7,7 +8,7 @@ import { Component, OnInit , Input} from '@angular/core';
   styleUrls: ['./people-in-event-list.component.scss']
 })
 export class PeopleInEventListComponent implements OnInit {
-@Input() peoples : peopleEntity[] | undefined;
+@Input() peoples? : Observable<peopleEntity[]>;
   constructor() { }
 
   ngOnInit(): void {

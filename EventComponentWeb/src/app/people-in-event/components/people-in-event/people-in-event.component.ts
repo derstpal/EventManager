@@ -1,8 +1,6 @@
 import { peopleEntity } from './../../../people/models/peopleEntity';
 import { PeopleService } from './../../../people/people.service';
 import { PeopleInEventService } from './../../services/people-in-event.service';
-import { eventEntity } from './../../../event/models/evententity.model';
-import { EventService } from './../../../event/services/events.service';
 import {
   Component,
   ElementRef,
@@ -11,7 +9,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { pipe, Subscription, map, switchMap, Observable } from 'rxjs';
+import { Subscription, map, switchMap, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-people-in-event',

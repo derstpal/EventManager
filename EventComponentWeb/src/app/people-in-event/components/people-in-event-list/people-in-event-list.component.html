@@ -1,1 +1,6 @@
-<p>people-in-event-list works!</p>
+<ul class="list-group-item">
+  <app-people-list-item
+    *ngFor="let people of (this.peoples | async)"
+    [people]="people"
+  ></app-people-list-item>
+</ul>

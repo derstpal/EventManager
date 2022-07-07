@@ -2,5 +2,7 @@
     <app-people-list-item
       *ngFor="let people of this.onPeopleList | async"
       [people]="people"
+      [hasSelection]="hasSelection"
+      (isSelectedChange)="isSelectedChange(people, $event)"
     ></app-people-list-item>
   </ul>

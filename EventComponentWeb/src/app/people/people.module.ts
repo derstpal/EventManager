@@ -39,7 +39,7 @@ import { PeopleFoodComponent } from './people-fooddiet/people-fooddiet.component
     MatFormFieldModule,
     MatInputModule
   ],
-  exports:[PeopleListComponent],
+  exports:[PeopleListComponent, PeopleListItemComponent],
   providers: [FormBuilder, PeopleService],
 })
 export class PeopleModule { }

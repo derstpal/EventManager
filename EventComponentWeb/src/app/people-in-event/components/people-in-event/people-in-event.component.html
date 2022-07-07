@@ -1,18 +1,18 @@
 <div class="container">
   <app-people-in-event-list
-    [peoples]="(invited$ | async) ?? undefined"
+    [peoples]="invited$"
   ></app-people-in-event-list>
   <button
     class="btn btn-primary"
     data-bs-toggle="modal"
     data-bs-target="#peoplesInEventcompModal"
-    [routerLink]="['/peoplesInEvent/invite']"
+    [routerLink]="['invite']"
   >
-    Add event
+    Invite
   </button>
   <div
     id="peoplesInEventcompModal"
-    class="modal modal-fullscreen-lg-down"
+    class="modal modal-fullscreen-xxl-down"
     tabindex="-1"
   >
     <div class="modal-dialog">

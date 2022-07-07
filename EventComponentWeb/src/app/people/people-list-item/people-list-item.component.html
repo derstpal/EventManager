@@ -17,6 +17,8 @@
           type="checkbox"
           [(ngModel)]="this.people.isSelected"
           style="display: none;"
+          (input)="select(selectPeople.checked)"
+          [checked]="isSelected"
         />
         <h3 class="mb-1">{{ people?.firstName }} {{ people?.lastName }}</h3>
       </div>

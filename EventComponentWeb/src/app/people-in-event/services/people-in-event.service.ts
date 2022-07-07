@@ -18,7 +18,7 @@ export class PeopleInEventService {
     private router: Router
   ) {}
 
-  public Invite(people: peopleEntity, event: eventEntity): Promise<void> {
+  public InviteAsync(people: peopleEntity, event: eventEntity): Promise<void> {
     if (this.authService.userCredential?.user === undefined) {
       return Promise.resolve();
     }
@@ -32,10 +32,7 @@ export class PeopleInEventService {
           event.key
         }`,
         payload
-      )
-      .then(() => {
-        this.router.navigate(['peoplesInEvent']);
-      });
+      ).then();
   }
   private getDatabaseReference(eventKey : string): Query {
     var ref = this.fireBaseService.GetDatabaseReference(
