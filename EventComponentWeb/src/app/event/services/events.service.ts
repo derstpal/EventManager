@@ -116,7 +116,11 @@ export class EventService {
 
   getAsync(key: string): Promise<eventEntity> {
     return this.fireBaseService
-      .GetAsync(`users/${this.authService.getConnectedUserId()}/events/${key}`)
+      .GetAsync(
+        this.fireBaseService.GetDatabaseReference(
+          `users/${this.authService.getConnectedUserId()}/events/${key}`
+        )
+      )
       .then((r) => this.createEventFromSnapshot(r));
   }
 }

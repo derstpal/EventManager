@@ -9,6 +9,8 @@ import {
   ref,
   DatabaseReference,
   Query,
+  update,
+  onValue,
 } from 'firebase/database';
 import { getDatabase } from 'firebase/database';
 import { Injectable } from '@angular/core';
@@ -18,6 +20,7 @@ import {
   createUserWithEmailAndPassword,
   UserCredential,
   signInWithEmailAndPassword,
+  Unsubscribe,
 } from 'firebase/auth';
 
 import { Observable } from 'rxjs';
@@ -66,6 +69,10 @@ export class FirebaseService {
     return ref(this.database, refp);
   }
 
+  UpdateAsync(query: DatabaseReference, entity: any): Promise<void> {
+    return update(query, entity);
+  }
+
   PushAsync(refp: string, entity: any): Promise<string | null> {
     return push(ref(this.database, refp), entity).then((dbRef) => {
       console.log(`inserted entitity ${dbRef.key} in ${refp}`);
@@ -73,8 +80,8 @@ export class FirebaseService {
     });
   }
 
-  GetAsync(refp: string): Promise<DataSnapshot> {
-    return get(ref(this.database, refp));
+  GetAsync(query: Query): Promise<DataSnapshot> {
+    return get(query);
   }
 
   OnChildAdded(ref: Query): Observable<any> {
@@ -132,6 +139,28 @@ export class FirebaseService {
         console.log('unsubscribe firebase');
         sub();
       };
+    });
+  }
+
+  FindAsync(ref: Query): Promise<DataSnapshot[]> {
+   var result :DataSnapshot[]  =  new Array() ;
+   var sub : Unsubscribe;
+    return new Promise<DataSnapshot[]>((executor) => {
+      sub = onValue(
+        ref,
+        (data) => {
+          console.table(data.val());
+          data.forEach(e => {result.push(e); return true;});
+          executor(result);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }).then(r => {
+        console.log('unsubscribe firebase');
+        sub();
+        return r;
     });
   }
 }
