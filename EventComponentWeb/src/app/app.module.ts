@@ -1,6 +1,7 @@
+import { InviteModule } from './invite/invite.module';
+import { InviteCreateComponent } from './invite/components/invite-create/invite-create.component';
 import { PeopleInEventModule } from './people-in-event/people-in-event.module';
 import { PeopleInEventComponent } from './people-in-event/components/people-in-event/people-in-event.component';
-import { InviteComponent } from './people-in-event/components/invite/invite.component';
 import { EventComponent } from './event/event/event.component';
 import { PeopleModule } from './people/people.module';
 import { PeopleAddComponent } from './people/people-add/people-add.component';
@@ -25,6 +26,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PeopleComponent } from './people/people/people.component';
+import { InviteComponent } from './invite/components/invite/invite.component';
 
 const appRoutes: Route[] = [
   { path: 'signin', component: SigninComponent },
@@ -58,10 +60,15 @@ const appRoutes: Route[] = [
     path: 'peoplesInEvent/:id',
     component: PeopleInEventComponent,
     canActivate: [AuthService],
+  },
+  {
+    path: 'invite/:id',
+    component: InviteComponent,
+    canActivate: [AuthService],
     children: [
       {
-        path: 'invite',
-        component: InviteComponent,
+        path: 'add',
+        component: InviteCreateComponent,
         canActivate: [AuthService],
       },
     ],
@@ -81,6 +88,7 @@ const appRoutes: Route[] = [
   imports: [
     PeopleModule,
     EventModule,
+    InviteModule,
     PeopleInEventModule,
     BrowserModule,
     FormsModule,

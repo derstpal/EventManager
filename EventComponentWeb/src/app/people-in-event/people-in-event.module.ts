@@ -1,7 +1,6 @@
 import { PeopleModule } from './../people/people.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InviteComponent } from './components/invite/invite.component';
 import { PeopleInEventListComponent } from './components/people-in-event-list/people-in-event-list.component';
 import { PeopleInEventListItemComponent } from './components/people-in-event-list-item/people-in-event-list-item.component';
 import { PeopleInEventComponent } from './components/people-in-event/people-in-event.component';
@@ -13,7 +12,6 @@ import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [
-    InviteComponent,
     PeopleInEventListComponent,
     PeopleInEventListItemComponent,
     PeopleInEventComponent

@@ -18,11 +18,6 @@ export class PeopleService {
     private router: Router
   ) {}
 
-  private events: Map<string | null, peopleEntity> = new Map<
-    string | null,
-    peopleEntity
-  >();
-
   createPeopleAsync(newPeople: peopleEntity): Promise<void> {
     if (this.authService.userCredential?.user === undefined) {
       return Promise.resolve();
